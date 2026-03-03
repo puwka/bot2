@@ -15,14 +15,16 @@
 
 2. **Репозиторий:** залейте проект в **GitHub** (или GitLab). В корне должны быть `requirements.txt`, `app/`, `.env.example`.
 
-3. **Новый Web Service:**
+3. **В корне репозитория** должен быть файл **`.python-version`** с содержимым `3.12` (или `3.11`) — иначе Render может взять Python 3.14 и сборка `pydantic-core` упадёт. В этом проекте файл уже есть.
+
+4. **Новый Web Service:**
    - Render → **New** → **Web Service**.
    - Подключите репозиторий.
    - **Settings:**
      - **Runtime:** Python 3
      - **Build Command:** `pip install -r requirements.txt`
      - **Start Command:** `python -m app.main`
-   - **Environment** — добавьте переменные (значения из вашего `.env`):
+   - **Environment** — добавьте переменные (при желании можно задать **PYTHON_VERSION** = `3.12.5`, если Render проигнорирует `.python-version`) (значения из вашего `.env`):
 
    | Key | Value |
    |-----|--------|
@@ -37,12 +39,12 @@
 
    Переменную **PORT** Render подставляет сам, в коде она уже учитывается.
 
-4. **Deploy:** нажмите **Create Web Service**. После первого деплоя возьмите URL сервиса (например `https://your-bot.onrender.com`) и в **Environment** задайте:
+5. **Deploy:** нажмите **Create Web Service**. После первого деплоя возьмите URL сервиса (например `https://your-bot.onrender.com`) и в **Environment** задайте:
    - `WEBHOOK_HOST` = `https://your-bot.onrender.com`
 
    При необходимости перезапустите сервис (Redeploy), чтобы webhook обновился.
 
-5. **Проверка:** отправьте боту в Telegram команду `/start`. Если бот «спал», первый ответ может прийти с задержкой.
+6. **Проверка:** отправьте боту в Telegram команду `/start`. Если бот «спал», первый ответ может прийти с задержкой.
 
 ---
 
